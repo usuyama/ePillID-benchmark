@@ -1,20 +1,7 @@
-# ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification
+# ePillID Benchmark
 
-Identifying prescription medications is a frequent task for patients and medical professionals; however, this is an
-error-prone task as many pills have similar appearances (e.g. white round pills), which increases the risk of medication errors. 
+This is the official repo for ther paper "ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification" (CVPR 2020 VL3).
 
-This repository contains data and codes for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
-
-The characteristics of the ePillID dataset include:
-* Reference and consumer images:  The reference images are taken with controlled lighting and backgrounds, and with professional equipment. The consumer images are taken with real-world settings including different lighting, backgrounds, and equipment. For most of the pills, one image per side (two images per pill type) is available from the NIH Pillbox dataset. 
-
-![Examples of reference and consumer images in ePillID](imgs/ePillID_reference_consumer_images.png)
-
-* Low-shot and fine-grained setting: 13k images representing 8184 appearance classes (two sides for 4092 pill types). For most of the appearance classes, there exists only one reference image, making it a challenging low-shot recognition setting.
-
-![ePillID data distribution](imgs/ePillID_stats.png)
-
-Please refer to our paper for more details:
 ```
 @inproceedings{usuyama2020epillid,
   title={ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification},
@@ -24,6 +11,21 @@ Please refer to our paper for more details:
   url={TBD}
 }
 ```
+
+This repository contains data and codes for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
+
+The characteristics of the ePillID benchmark include:
+* Reference and consumer images:  The reference images are taken with controlled lighting and backgrounds, and with professional equipment. The consumer images are taken with real-world settings including different lighting, backgrounds, and equipment. For most of the pills, one image per side (two images per pill type) is available from the NIH Pillbox dataset. 
+
+![Examples of reference and consumer images in ePillID](imgs/ePillID_reference_consumer_images.png)
+
+* Low-shot and fine-grained setting: 13k images representing 8184 appearance classes (two sides for 4092 pill types). For most of the appearance classes, there exists only one reference image, making it a challenging low-shot recognition setting.
+
+![ePillID data distribution](imgs/ePillID_stats.png)
+
+* The best performing model at the time of publication is a multi-head metric learning approach. Following a CNN encoder, a biliner transformation layer is used to represent fine-grained embeddings.
+
+![Model overview](imgs/model_overview.png)
 
 ## Data
 
@@ -35,7 +37,7 @@ Docker image https://hub.docker.com/r/naotous/pytorch-image
 
 `sudo nvidia-docker pull naotous/pytorch-image:py36torch041-legacy`
 
-## Run locally
+## Train and evaluate models
 
 `sudo nvidia-docker run --ipc=host -it -v $HOME:$HOME naotous/pytorch-image:py36torch041-legacy /bin/bash`
 
@@ -43,22 +45,24 @@ use -v mount option to access folders from Docker containers
 
 `source activate py36`
 
-`python train_cv.py --appearance_network resnet18 --max_epochs 10  --data_root_dir /home/naotous/ePillID_data`
+`python train_cv.py --appearance_network resnet18 --max_epochs 10 --data_root_dir /home/naotous/ePillID_data`
 
 NOTE: max_epochs 10 for quick testing
 
-## Run on Azure ML
+## Train and evaluate models on Azure ML
 
 `python azureml_submit_runs.py ePillID_0430`
 
-## Acknowledgements
+## Notes
 
-The ePillID dataset leverages the two public data sources from NIH NLM. The data included in the ePillID is modified and expanded. Refer to their websites for the original data:
+The ePillID dataset includes customized data from two public NIH NLM databases. Please refer to their websites for original data:
 * [NIH NLM Pill Image Recognition Challenge dataset](https://pir.nlm.nih.gov/challenge/)
 * [NIH NLM Pillbox](https://pillbox.nlm.nih.gov/statistics.html)
 
 
-For bilinear pooling implementations, [fast-MPN-Cov GitHub repo](https://github.com/jiangtaoxie/fast-MPN-COV)
+For bilinear pooling implementations, we forked [fast-MPN-Cov GitHub repo](https://github.com/jiangtaoxie/fast-MPN-COV).
+
+Please consider citing these work as well when you find our work useful in your research.
 
 ## Disclaimer
 

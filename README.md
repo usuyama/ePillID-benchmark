@@ -1,17 +1,5 @@
 # ePillID Benchmark
 
-This is the official repo for ther paper "ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification" (CVPR 2020 VL3).
-
-```
-@inproceedings{usuyama2020epillid,
-  title={ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification},
-  author={Usuyama, Naoto and Delgado, Natalia Larios and Hall, Amanda K and Lundin, Jessica},
-  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops},
-  year={2020},
-  url={TBD}
-}
-```
-
 This repository contains data and codes for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
 
 The characteristics of the ePillID benchmark include:
@@ -23,9 +11,20 @@ The characteristics of the ePillID benchmark include:
 
 ![ePillID data distribution](imgs/ePillID_stats.png)
 
-* The best performing model at the time of publication is a multi-head metric learning approach. Following a CNN encoder, a biliner transformation layer is used to represent fine-grained embeddings.
+* The best performing model at the time of publication is a multi-head metric learning approach. Following a CNN encoder, a bilinear transformation layer is used to represent fine-grained embeddings.
 
 ![Model overview](imgs/model_overview.png)
+
+Please refer to our paper for more details:
+
+```
+@inproceedings{usuyama2020epillid,
+  title={ePillID Dataset: A Low-Shot Fine-Grained Benchmark for Pill Identification},
+  author={Usuyama, Naoto and Delgado, Natalia Larios and Hall, Amanda K and Lundin, Jessica},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops},
+  year={2020}
+}
+```
 
 ## Data
 
@@ -53,7 +52,7 @@ NOTE: max_epochs 10 for quick testing
 
 `python azureml_submit_runs.py ePillID_0430`
 
-## Notes
+## Notes and acknowledgments
 
 The ePillID dataset includes customized data from two public NIH NLM databases. Please refer to their websites for original data:
 * [NIH NLM Pill Image Recognition Challenge dataset](https://pir.nlm.nih.gov/challenge/)
@@ -62,8 +61,8 @@ The ePillID dataset includes customized data from two public NIH NLM databases. 
 
 For bilinear pooling implementations, we forked [fast-MPN-Cov GitHub repo](https://github.com/jiangtaoxie/fast-MPN-COV).
 
-Please consider citing these work as well when you find our work useful in your research.
+Please consider citing their work as well when you find our work useful in your research.
 
 ## Disclaimer
 
-This dataset and software is released for research purpose only.
+This dataset and software are released for research purposes only.

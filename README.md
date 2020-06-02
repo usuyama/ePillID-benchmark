@@ -1,6 +1,6 @@
 # ePillID Benchmark
 
-This repository contains data and codes for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
+This repository contains data and code for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
 
 The characteristics of the ePillID benchmark include:
 * Reference and consumer images:  The reference images are taken with controlled lighting and backgrounds, and with professional equipment. The consumer images are taken with real-world settings including different lighting, backgrounds, and equipment. For most of the pills, one image per side (two images per pill type) is available from the NIH Pillbox dataset. 

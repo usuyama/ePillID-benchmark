@@ -1,4 +1,4 @@
-# ePillID Benchmark
+# ePillID Benchmark [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/usuyama/ePillID-benchmark/blob/master/ePillID_tutorial_colab.ipynb) 
 
 This repository contains data and code for ePillID - a benchmark for developing and evaluating computer vision models for pill identification. The ePillID benchmark is designed as a low-shot fine-grained benchmark, reflecting real-world challenges for developing image-based pill identification systems.
 

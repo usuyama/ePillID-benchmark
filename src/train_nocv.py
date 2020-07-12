@@ -11,7 +11,8 @@ import copy
 import warnings
 
 from metric_test_eval import MetricEmbeddingEvaluator, LogitEvaluator
-
+import logging
+logger = logging.getLogger(__name__)
 
 def run(args):
     if args.supress_warnings:
@@ -52,20 +53,36 @@ def run(args):
     # log arguments if it's not called by train_cv
     if not hasattr(args, 'folds_csv_dir'):
         for k, v in vars(args).items():
-            run.log(k, str(v))
+            run.tag(k, str(v))
 
     save_path = os.path.join(args.results_dir, param_str)
     os.makedirs(save_path, exist_ok=True)
     print("save_path", save_path)
 
+    logger.info(f"cuda.is_available={torch.cuda.is_available()}, n_gpu={torch.cuda.device_count()}")
+
     # encode the classes
     from sklearn.preprocessing import LabelEncoder
 
     import pickle
-    print("Loading label encoder", args.label_encoder)
-    with open(args.label_encoder, 'rb') as pickle_file:
-        label_encoder = pickle.load(pickle_file)
-    print("The label encoder has {} classes.".format(len(label_encoder.classes_)))
+    if not os.path.exists(args.label_encoder):
+        logger.warning(f"Fitting a new label encoder at {args.label_encoder}")
+
+        all_imgs_df = pd.read_csv(args.all_imgs_csv)
+
+        label_encoder = LabelEncoder()
+        label_encoder.fit(all_imgs_df['label'])
+    
+        pickle.dump(label_encoder, open(args.label_encoder, "wb"))
+
+    else:
+        logger.info(f"Loading label encoder: {args.label_encoder}")
+
+        with open(args.label_encoder, 'rb') as pickle_file:
+            label_encoder = pickle.load(pickle_file)
+
+    logger.info(f"label_encoder.classes_={label_encoder.classes_}")    
+    logger.info("The label encoder has {} classes.".format(len(label_encoder.classes_)))
 
     # Load image list
     all_images_df = pd.read_csv(args.all_imgs_csv)

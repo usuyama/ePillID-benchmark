@@ -14,6 +14,14 @@ import train_nocv
 import pandas as pd
 import numpy as np
 from metrics import all_avg_precision
+import logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(name)s#L%(lineno)-3s -  %(message)s",
+    datefmt="%m/%d %H:%M:%S"
+ )
+logging.getLogger().setLevel(logging.INFO) # needed for AML
+logger = logging.getLogger(__name__)
 
 # Azure ML
 from azureml.core.run import Run
@@ -21,18 +29,18 @@ run = Run.get_context()
 
 # log arguments
 for k, v in vars(args).items():
-    # TODO: should use tag after updating azureml sdk
-    run.log(k, str(v))
+    run.tag(k, str(v))
 
 # TODO: fix path issue when data_root_dir is not aboslute path
+assert os.path.isabs(args.data_root_dir)
 # find csv files and prepare args for each run
 args.folds_csv_dir = os.path.join(args.data_root_dir, args.folds_csv_dir)
-args.label_encoder = os.path.join(args.folds_csv_dir, "label_encoder.pickle")
+args.label_encoder = os.path.join(args.folds_csv_dir, "label_encoder_pytorch131.pickle")
 
 # make sure csv_files are sorted
 csv_files = glob(os.path.join(args.folds_csv_dir, "*.csv"))
-args.all_imgs_csv = [x for x in csv_files if (args.all_img_src in x) ][0]
-csv_files = sorted([ x for x in csv_files if not ( ("all" in x) or ("synth" in x) ) ])
+args.all_imgs_csv = [x for x in csv_files if x.endswith("all.csv")][0]
+csv_files = sorted([x for x in csv_files if not x.endswith("all.csv")])
 
 args.test_imgs_csv = csv_files.pop(-1)  # use the last fold as hold out
 

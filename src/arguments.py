@@ -52,7 +52,7 @@ def nocv_parser():
     parser.add_argument('--all_imgs_csv', default="folds/pilltypeid_nih_sidelbls0.01_metric_5folds/base/pilltypeid_nih_sidelbls0.01_metric_5folds_all.csv")
     parser.add_argument('--val_imgs_csv', default="folds/pilltypeid_nih_sidelbls0.01_metric_5folds/base/pilltypeid_nih_sidelbls0.01_metric_5folds_3.csv")
     parser.add_argument('--test_imgs_csv', default="folds/pilltypeid_nih_sidelbls0.01_metric_5folds/base/pilltypeid_nih_sidelbls0.01_metric_5folds_4.csv")
-    parser.add_argument('--label_encoder', default="folds/pilltypeid_nih_sidelbls0.01_metric_5folds/base/label_encoder.pickle")
+    parser.add_argument('--label_encoder', default="folds/pilltypeid_nih_sidelbls0.01_metric_5folds/base/label_encoder_pytorch131.pickle")
 
     return parser
 

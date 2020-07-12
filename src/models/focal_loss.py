@@ -71,4 +71,4 @@ if __name__ == "__main__":
     # exception will occur when input and target are stored to GPU(s).
     # focal_with_onehot(input, target)
     print(FocalLossWithOutOneHot(gamma=0)(input, target))
-    print(F.cross_entropy(input, target, reduce=True))
+    print(F.cross_entropy(input, target, reduction='mean'))

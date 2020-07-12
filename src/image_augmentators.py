@@ -23,11 +23,11 @@ max_scale = 1.0, add_perspective = False
 
     contrast_list = [
             iaa.Sequential([
-                iaa.ContrastNormalization((0.7, 1.0), per_channel=False), # change contrast
+                iaa.LinearContrast((0.7, 1.0), per_channel=False), # change contrast
                 iaa.Add((-30, 30), per_channel=False), # change brightness
             ]),
             iaa.Sequential([
-                iaa.ContrastNormalization((0.4, 1.0), per_channel=False), # change contrast
+                iaa.LinearContrast((0.4, 1.0), per_channel=False), # change contrast
                 iaa.Add((-80, 80), per_channel=False), # change brightness
             ])            
         ]
@@ -60,7 +60,7 @@ max_scale = 1.0, add_perspective = False
     ])
 
     cons_seq = iaa.Sequential(affine_list + [
-        iaa.ContrastNormalization((0.9, 1.1), per_channel=False),
+        iaa.LinearContrast((0.9, 1.1), per_channel=False),
         iaa.Add((-10, 10), per_channel=False),
         iaa.AdditiveGaussianNoise(loc=0, scale=(0.0, 5*addgn_base_cons*255), per_channel=0.5),
         iaa.GaussianBlur(sigma=(0, low_gblur)),

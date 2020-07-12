@@ -53,10 +53,10 @@ class MultiheadLoss(nn.Module):
         if is_front is not None:
             # shift the target labels
             target = target.clone().detach()
-            target[~(is_front.byte())] += self.n_pilltypes
+            target[~(is_front.bool())] += self.n_pilltypes
 
         if self.weights['ce'] > 0.0:
-            losses['ce'] = F.cross_entropy(outputs['logits'], target, reduce=True)                
+            losses['ce'] = F.cross_entropy(outputs['logits'], target, reduction='mean')                
             weighted_loss += losses['ce'] * self.weights['ce']
 
         if self.weights['focal'] > 0.0:
@@ -64,7 +64,7 @@ class MultiheadLoss(nn.Module):
             weighted_loss += losses['focal'] * self.weights['focal']
 
         if self.weights['arcface'] > 0.0:
-            losses['arcface'] = F.cross_entropy(outputs['arcface_logits'], target, reduce=True)
+            losses['arcface'] = F.cross_entropy(outputs['arcface_logits'], target, reduction='mean')
             weighted_loss += losses['arcface'] * self.weights['arcface']
 
         losses['loss'] = weighted_loss

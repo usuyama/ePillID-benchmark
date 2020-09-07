@@ -7,7 +7,7 @@ The characteristics of the ePillID benchmark include:
 
 ![Examples of reference and consumer images in ePillID](imgs/ePillID_reference_consumer_images.png)
 
-* Low-shot and fine-grained setting: 13k images representing 8184 appearance classes (two sides for 4092 pill types). For most of the appearance classes, there exists only one reference image, making it a challenging low-shot recognition setting.
+* Low-shot and fine-grained setting: 13k images representing 9804 appearance classes (two sides for 4902 pill types). For most of the appearance classes, there exists only one reference image, making it a challenging low-shot recognition setting.
 
 ![ePillID data distribution](imgs/ePillID_stats.png)
 

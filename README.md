@@ -29,7 +29,7 @@ Please refer to our paper for more details:
 
 ## Data
 
-Download and unzip [ePillID_data.zip](https://github.com/usuyama/ePillID-benchmark/releases)
+Downloadable from [the releases page](https://github.com/usuyama/ePillID-benchmark/releases).
 
 ## Docker
 
